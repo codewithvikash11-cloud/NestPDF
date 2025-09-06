@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/ui/theme-provider";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
