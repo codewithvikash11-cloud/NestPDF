@@ -1,14 +1,28 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+Sitemap: https://pdfnest.com/sitemap.xml
+
+# Disallow crawling of admin or private areas (if any)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow all PDF tools
+Allow: /pdf-to-word
+Allow: /word-to-pdf
+Allow: /merge-pdf
+Allow: /split-pdf
+Allow: /compress-pdf
+Allow: /pdf-to-jpg
+Allow: /jpg-to-pdf
+Allow: /unlock-pdf
+Allow: /protect-pdf
+Allow: /rotate-pdf
+
+# Allow important pages
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms

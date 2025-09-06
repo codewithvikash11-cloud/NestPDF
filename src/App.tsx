@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import PdfToWord from "./pages/tools/PdfToWord";
 import WordToPdf from "./pages/tools/WordToPdf";
 import MergePdf from "./pages/tools/MergePdf";
@@ -32,6 +34,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/pdf-to-word" element={<PdfToWord />} />
             <Route path="/word-to-pdf" element={<WordToPdf />} />
             <Route path="/merge-pdf" element={<MergePdf />} />

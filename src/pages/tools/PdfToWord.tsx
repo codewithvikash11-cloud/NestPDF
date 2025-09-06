@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/Layout";
+import MetaTags from "@/components/MetaTags";
 import { FileText, Upload, Download, CheckCircle, AlertCircle } from "lucide-react";
+import { convertPdfToWord, downloadFile } from "@/lib/pdf-utils";
+import { toast } from "sonner";
 
 const PdfToWord = () => {
   const [dragActive, setDragActive] = useState(false);
@@ -44,14 +47,30 @@ const PdfToWord = () => {
     if (!file) return;
     
     setConverting(true);
-    // Simulate conversion process
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    setConverting(false);
-    setConverted(true);
+    try {
+      const wordBlob = await convertPdfToWord(file);
+      const filename = file.name.replace('.pdf', '.txt');
+      downloadFile(wordBlob, filename);
+      setConverted(true);
+      toast.success("PDF converted to Word successfully!");
+    } catch (error) {
+      toast.error("Failed to convert PDF. Please try again.");
+      console.error("Conversion error:", error);
+    } finally {
+      setConverting(false);
+    }
   };
 
   return (
     <Layout>
+      <MetaTags
+        title="PDF to Word Converter - Free Online Tool"
+        description="Convert PDF documents to editable Word files instantly. Maintain formatting, images, and layout with our advanced conversion technology. Free, secure, and works in your browser."
+        keywords="PDF to Word, convert PDF, PDF converter, Word document, editable PDF, free PDF tool, online converter"
+        ogTitle="PDF to Word Converter - Free Online Tool"
+        ogDescription="Convert PDF documents to editable Word files instantly. Maintain formatting, images, and layout with our advanced conversion technology."
+        canonical="https://pdfnest.com/pdf-to-word"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* SEO Header */}
         <div className="text-center space-y-4 mb-12">
@@ -122,7 +141,14 @@ const PdfToWord = () => {
                     </Button>
                   )}
                   {converted && (
-                    <Button className="bg-green-500 hover:bg-green-600 text-white">
+                    <Button 
+                      onClick={() => {
+                        if (file) {
+                          convertFile();
+                        }
+                      }}
+                      className="bg-green-500 hover:bg-green-600 text-white"
+                    >
                       <Download className="mr-2 h-4 w-4" />
                       Download Word File
                     </Button>
